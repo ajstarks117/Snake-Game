@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Snake Game</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.90.0/dist/phaser.min.js"></script>
+</head>
+
+<body>
+
+    <div class="game-container">
+
+        <header class="game-header">
+            <h1>SNAKE</h1>
+            <p>CLASSIC ARENA</p>
+        </header>
+
+        <div class="score-board">
+
+            <div class="score-item">
+                <span class="score-label">SCORE</span>
+                <span id="score">0000</span>
+            </div>
+
+            <div class="score-item">
+                <span class="score-label">HIGH SCORE</span>
+                <span id="high-score">0000</span>
+            </div>
+
+        </div>
+
+        <div class="game-wrapper">
+
+            <div id="game"></div>
+
+            <div id="start-screen">
+                <div class="start-message">
+                    <p>PRESS ANY ARROW KEY</p>
+                    <span>TO START</span>
+                </div>
+            </div>
+
+            <div id="game-over" class="hidden">
+                <div class="game-over-dialog">
+                    <h2>GAME OVER</h2>
+                    <p>FINAL SCORE</p>
+                    <div class="game-over-actions">
+                        <span id="final-score">0000</span>
+                        <button id="restart-button">RESTART</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="controls">
+            <div class="control-keys" aria-hidden="true">
+                <span>↑</span>
+                <span>↓</span>
+                <span>←</span>
+                <span>→</span>
+            </div>
+            <span class="control-divider"></span>
+            <p>ARROW KEYS TO MOVE</p>
+        </div>
+
+    </div>
+
+    <script src="js/Game.js"></script>
+
+</body>
+</html>

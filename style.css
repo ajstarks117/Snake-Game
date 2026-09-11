@@ -1,0 +1,380 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    background:
+        radial-gradient(circle at 50% 38%, rgba(18, 55, 68, 0.45), transparent 38%),
+        radial-gradient(circle at 8% 72%, rgba(10, 75, 69, 0.2), transparent 25%),
+        #050d19;
+    color: white;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 30px;
+}
+
+/* Main container */
+.game-container {
+    width: min(560px, 100%);
+    text-align: center;
+}
+
+/* ---------------- HEADER ---------------- */
+
+.game-header {
+    margin-bottom: 16px;
+}
+
+.game-header h1 {
+    font-size: clamp(36px, 8vw, 58px);
+    letter-spacing: 12px;
+    font-weight: 800;
+    line-height: 0.95;
+    color: #f5fff9;
+    text-shadow: 0 0 8px rgba(34, 197, 94, 0.8), 0 0 24px rgba(34, 197, 94, 0.5);
+}
+
+.game-header p {
+    margin-top: 5px;
+    font-size: 12px;
+    letter-spacing: 5px;
+    color: #8e9eaf;
+}
+
+/* ---------------- SCORE ---------------- */
+
+.score-board {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+
+    margin-bottom: 14px;
+}
+
+.score-item {
+    min-width: 155px;
+
+    padding: 9px 18px 8px;
+
+    background: rgba(8, 20, 34, 0.72);
+    border: 1px solid #34465b;
+    border-radius: 12px;
+    box-shadow: inset 0 0 18px rgba(18, 47, 63, 0.35);
+}
+
+.score-label {
+    display: block;
+
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #9aabba;
+
+    margin-bottom: 4px;
+}
+
+.score-item span:last-child {
+    font-size: 27px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #19f59b;
+    text-shadow: 0 0 9px rgba(25, 245, 155, 0.65);
+}
+
+/* ---------------- GAME ---------------- */
+
+.game-wrapper {
+    position: relative;
+
+    width: 506px;
+    height: 506px;
+
+    margin: 0 auto;
+
+    padding: 2px;
+
+    background: rgba(5, 15, 27, 0.88);
+    border: 1px solid #20f5a1;
+    border-radius: 12px;
+    box-shadow:
+        0 0 6px rgba(32, 245, 161, 0.9),
+        0 0 22px rgba(32, 245, 161, 0.32),
+        inset 0 0 28px rgba(5, 55, 54, 0.28);
+
+    overflow: hidden;
+}
+
+/* Phaser container */
+#game {
+    width: 500px;
+    height: 500px;
+
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#game canvas {
+    display: block;
+}
+
+/* ---------------- START SCREEN ---------------- */
+
+#start-screen {
+    position: absolute;
+    inset: 2px;
+    display: grid;
+    place-items: center;
+    background: rgba(3, 12, 24, 0.52);
+    z-index: 8;
+    transition: opacity 0.35s ease;
+}
+
+.start-message {
+    padding: 15px 24px;
+    border: 1px solid rgba(32, 245, 161, 0.38);
+    border-radius: 9px;
+    background: rgba(5, 22, 34, 0.72);
+    box-shadow: 0 0 18px rgba(32, 245, 161, 0.12);
+}
+
+.start-message p,
+.start-message span {
+    display: block;
+    color: #d8f9e9;
+    font-size: 11px;
+    letter-spacing: 3px;
+}
+
+.start-message span {
+    margin-top: 7px;
+    color: #19f59b;
+    font-size: 9px;
+}
+
+/* ---------------- GAME OVER ---------------- */
+
+#game-over {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(3, 12, 24, 0.78);
+
+    backdrop-filter: blur(5px);
+
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+}
+
+#game-over.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.game-over-dialog {
+    width: min(335px, calc(100% - 32px));
+    padding: 30px 34px 34px;
+    background: rgba(7, 22, 35, 0.97);
+    border: 1px solid #20f5a1;
+    border-radius: 12px;
+    box-shadow:
+        0 0 8px rgba(32, 245, 161, 0.75),
+        0 0 28px rgba(32, 245, 161, 0.28),
+        inset 0 0 20px rgba(13, 91, 77, 0.25);
+}
+
+#game-over h2 {
+    font-size: 30px;
+    letter-spacing: 4px;
+
+    margin-bottom: 15px;
+    color: #f5fff9;
+    text-shadow: 0 0 12px rgba(34, 197, 94, 0.7);
+}
+
+#game-over p {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #9aabba;
+
+    margin-bottom: 5px;
+}
+
+#final-score {
+    font-size: 42px;
+    font-weight: bold;
+
+    color: #19f59b;
+    text-shadow: 0 0 9px rgba(25, 245, 155, 0.65);
+
+    margin: 0;
+}
+
+.game-over-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* ---------------- BUTTON ---------------- */
+
+button {
+    padding: 12px 28px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #22c55e;
+    color: #052e16;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease;
+}
+
+button:hover {
+    background: #4ade80;
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* ---------------- CONTROLS ---------------- */
+
+.controls {
+    width: fit-content;
+    min-height: 43px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 24px auto 0;
+    padding: 7px 18px;
+    border: 1px solid #30425a;
+    border-radius: 14px;
+    background: rgba(8, 19, 33, 0.64);
+    box-shadow: inset 0 0 16px rgba(25, 52, 68, 0.3);
+}
+
+.control-keys {
+    display: flex;
+    gap: 7px;
+}
+
+.control-keys span {
+    width: 25px;
+    height: 25px;
+    display: grid;
+    place-items: center;
+    border: 1px solid #718096;
+    border-radius: 4px;
+    color: #d8e5ed;
+    font-size: 15px;
+    line-height: 1;
+    box-shadow: inset 0 0 7px rgba(116, 157, 177, 0.18);
+}
+
+.control-divider {
+    width: 1px;
+    height: 20px;
+    background: #30425a;
+}
+
+.controls p {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #8293a6;
+}
+
+/* ---------------- HIDDEN ---------------- */
+
+.hidden {
+    display: none !important;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 15px;
+    }
+
+    .game-container {
+        width: 100%;
+    }
+
+    .game-wrapper {
+        width: min(506px, 100%);
+        height: auto;
+        aspect-ratio: 1;
+    }
+
+    #game {
+        width: 100%;
+        height: 100%;
+    }
+
+    .game-header h1 {
+        font-size: 32px;
+    }
+
+    .score-item {
+        min-width: 110px;
+    }
+
+    .score-board {
+        gap: 10px;
+    }
+
+    .controls {
+        max-width: 100%;
+        padding: 7px 10px;
+        gap: 9px;
+    }
+
+    .controls p {
+        letter-spacing: 1.5px;
+    }
+}
+
+.score-pop {
+    animation: score-pop 0.35s ease;
+}
+
+@keyframes score-pop {
+    50% {
+        transform: scale(1.18);
+        color: #b6ffd9;
+    }
+}
